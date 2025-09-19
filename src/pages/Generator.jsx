@@ -90,7 +90,7 @@ export default function Generator() {
   return (
     <div className="min-h-screen text-white pt-10">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
-        <motion.div initial={{ opacity: 0, y:20 }} animate={{ opacity:1, y:0 }} transition={{ duration: 0.5}}>
+        <div>
           <div className="mb-12">
             <h1 className="text-5xl md:text-6xl font-extrabold tracking-tighter mb-4">
               Prompt <span className="text-blue-400">Generator</span>
@@ -99,7 +99,7 @@ export default function Generator() {
               Build your next masterpiece. Our interactive tool helps you construct the perfect Suno prompt, step by step.
             </p>
           </div>
-        </motion.div>
+        </div>
 
         <div className="grid lg:grid-cols-12 gap-8">
           <div className="lg:col-span-7 space-y-6">

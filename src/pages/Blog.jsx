@@ -158,11 +158,7 @@ export default function Blog() {
             Back to Blog
           </Button>
 
-          <motion.article
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5 }}
-          >
+                    <article>
             <header className="mb-12">
               <Badge className="mb-4 bg-blue-500/20 text-blue-400 border border-blue-500/30 capitalize">
                 {selectedPost.category.replace('-', ' ')}
@@ -170,7 +166,7 @@ export default function Blog() {
               <h1 className="text-4xl md:text-5xl font-extrabold tracking-tighter mb-4">
                 {selectedPost.title}
               </h1>
-              <div className="flex items-center gap-4 text-slate-400">
+              <div className="flex items-center gap-6 text-slate-400 text-sm">
                 <div className="flex items-center gap-2">
                   <Clock className="w-4 h-4" />
                   <span>{new Date(selectedPost.created_date).toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' })}</span>
@@ -181,7 +177,7 @@ export default function Blog() {
             <div className="prose prose-invert prose-lg max-w-none prose-p:text-slate-300 prose-headings:font-extrabold prose-headings:tracking-tighter prose-h2:text-3xl prose-h3:text-2xl prose-a:text-blue-400 hover:prose-a:text-blue-500 prose-strong:text-white">
               <ReactMarkdown>{selectedPost.content}</ReactMarkdown>
             </div>
-          </motion.article>
+          </article>
         </div>
       </div>
     );
@@ -190,7 +186,7 @@ export default function Blog() {
   return (
     <div className="min-h-screen text-white pt-10">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
-        <motion.div initial={{ opacity: 0, y:20 }} animate={{ opacity:1, y:0 }} transition={{ duration: 0.5}}>
+        <div>
           <div className="mb-16">
             <h1 className="text-5xl md:text-6xl font-extrabold tracking-tighter mb-4">
               SunoPrompt <span className="text-blue-400">Blog</span>
@@ -226,7 +222,7 @@ export default function Blog() {
               ))}
             </div>
           </div>
-        </motion.div>
+        </div>
 
         {loading ? (
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
@@ -243,11 +239,8 @@ export default function Blog() {
         ) : (
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
             {filteredPosts.map((post, index) => (
-              <motion.div
+              <div
                 key={post.id}
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.5, delay: index * 0.05 }}
               >
                 <Card 
                   onClick={() => setSelectedPost(post)}
@@ -268,7 +261,7 @@ export default function Blog() {
                     </div>
                   </CardContent>
                 </Card>
-              </motion.div>
+              </div>
             ))}
           </div>
         )}

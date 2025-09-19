@@ -89,21 +89,16 @@ export default function Guide() {
               </div>
             </aside>
 
-            <motion.main 
+                        <main 
               key={selectedSection.id}
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.5 }}
               className="lg:col-span-9"
             >
               <article>
                 <header className="mb-8 border-b border-white/10 pb-8">
-                  {selectedSection.parent_section && (
-                    <Badge className="mb-4 bg-blue-500/20 text-blue-400 border border-blue-500/30">
-                      {parent?.title}
-                    </Badge>
-                  )}
-                  <h1 className="text-4xl md:text-5xl font-extrabold tracking-tighter">
+                  <Badge className="mb-4 bg-blue-500/20 text-blue-400 border border-blue-500/30">
+                    Section {selectedSection.order}
+                  </Badge>
+                  <h1 className="text-4xl md:text-5xl font-extrabold tracking-tighter mb-4">
                     {selectedSection.title}
                   </h1>
                 </header>
@@ -112,7 +107,7 @@ export default function Guide() {
                   <ReactMarkdown>{selectedSection.content}</ReactMarkdown>
                 </div>
               </article>
-            </motion.main>
+            </main>
           </div>
         </div>
       </div>
@@ -122,7 +117,7 @@ export default function Guide() {
   return (
     <div className="min-h-screen text-white pt-10">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
-        <motion.div initial={{ opacity: 0, y:20 }} animate={{ opacity:1, y:0 }} transition={{ duration: 0.5}}>
+        <div>
           <div className="mb-16">
             <h1 className="text-5xl md:text-6xl font-extrabold tracking-tighter mb-4">
               The Complete <span className="text-blue-400">Suno Guide</span>
@@ -131,7 +126,7 @@ export default function Guide() {
               From prompt structure to advanced techniques, master every aspect of Suno AI.
             </p>
           </div>
-        </motion.div>
+        </div>
 
         {loading ? (
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
@@ -142,11 +137,8 @@ export default function Guide() {
         ) : (
           <div className="space-y-12">
             {getMainSections().map((section, index) => (
-              <motion.div
+              <div
                 key={section.id}
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.5, delay: index * 0.1 }}
               >
                 <h2 className="text-3xl font-bold tracking-tighter mb-6 flex items-center gap-3">
                   <div className="w-10 h-10 bg-white/10 rounded-lg flex items-center justify-center border border-white/20">
@@ -185,7 +177,7 @@ export default function Guide() {
                     </Card>
                   ))}
                 </div>
-              </motion.div>
+              </div>
             ))}
           </div>
         )}

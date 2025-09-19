@@ -80,11 +80,7 @@ export default function Homepage() {
       <section className="py-20 lg:py-32">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center">
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.8 }}
-            >
+            <div>
               <Badge className="mb-6 bg-blue-500/10 text-blue-400 border border-blue-500/30 px-4 py-1 text-sm">
                 The Ultimate Guide to Suno V3
               </Badge>
@@ -96,12 +92,9 @@ export default function Homepage() {
               <p className="text-lg text-slate-400 mt-6 max-w-3xl mx-auto">
                 Unlock professional-quality music generation. Master Suno AI with our comprehensive guides, interactive prompt generator, and expert techniques.
               </p>
-            </motion.div>
+            </div>
 
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.8, delay: 0.2 }}
+            <div
               className="flex flex-col sm:flex-row gap-4 justify-center mt-10"
             >
               <Link to={createPageUrl("Generator")}>
@@ -116,7 +109,7 @@ export default function Homepage() {
                   Read The Guide
                 </Button>
               </Link>
-            </motion.div>
+            </div>
           </div>
         </div>
       </section>
@@ -126,12 +119,8 @@ export default function Homepage() {
         <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
             {stats.map((stat, index) => (
-              <motion.div
+              <div
                 key={stat.label}
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.5, delay: index * 0.1 }}
                 className="bg-white/5 border border-white/10 rounded-xl p-6 text-center"
               >
                 <div className="text-blue-400 mb-2">
@@ -139,7 +128,7 @@ export default function Homepage() {
                 </div>
                 <div className="text-3xl font-bold text-white mb-1">{stat.value}</div>
                 <div className="text-slate-400 text-sm">{stat.label}</div>
-              </motion.div>
+              </div>
             ))}
           </div>
         </div>
@@ -162,12 +151,8 @@ export default function Homepage() {
               ))
             ) : (
               featuredPosts.map((post, index) => (
-                <motion.div
+                <div
                   key={post.id}
-                  initial={{ opacity: 0, y: 20 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true }}
-                  transition={{ duration: 0.5, delay: index * 0.1 }}
                 >
                   <Link to={createPageUrl(`Blog?post=${post.slug}`)}>
                     <Card className="bg-white/5 border border-white/10 rounded-xl hover:border-blue-500/50 transition-all duration-300 group h-full flex flex-col">
@@ -187,7 +172,7 @@ export default function Homepage() {
                       </CardContent>
                     </Card>
                   </Link>
-                </motion.div>
+                </div>
               ))
             )}
           </div>
@@ -205,12 +190,7 @@ export default function Homepage() {
       {/* Prompt Guide CTA */}
       <section className="py-20">
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center bg-white/5 border border-white/10 rounded-2xl p-12">
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.8 }}
-          >
+          <div>
             <h2 className="text-3xl md:text-4xl font-bold tracking-tighter mb-4">
               Go from Beginner to Pro
             </h2>
@@ -223,7 +203,7 @@ export default function Homepage() {
                 Explore The Complete Guide
               </Button>
             </Link>
-          </motion.div>
+          </div>
         </div>
       </section>
     </div>
