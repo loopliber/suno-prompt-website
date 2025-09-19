@@ -5,13 +5,9 @@ import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
-import { Search, Clock, ArrowRight, Filter, ArrowLeft } from "lucide-react";
-// Temporarily disable framer-motion to fix useLayoutEffect error
-// import { motion } from "framer-motion";
-import ReactMarkdown from "react-markdown";
+import { Search, ArrowRight, Filter } from "lucide-react";
 import { Link } from "react-router-dom";
-import { createPageUrl } from "@/utils";
-import { updateSEO, generateStructuredData, injectStructuredData } from "@/utils/seo.js";
+import { updateSEO } from "@/utils/seo.js";
 
 // Temporary motion replacement to fix useLayoutEffect error
 const motion = {
@@ -33,78 +29,22 @@ const categories = [
 export default function Blog() {
   const [posts, setPosts] = useState([]);
   const [filteredPosts, setFilteredPosts] = useState([]);
-  const [selectedPost, setSelectedPost] = useState(null);
   const [loading, setLoading] = useState(true);
   const [searchTerm, setSearchTerm] = useState("");
   const [selectedCategory, setSelectedCategory] = useState("all");
 
-  // SEO setup for blog page
+  // SEO setup for blog listing page
   useEffect(() => {
-    if (selectedPost) {
-      // Individual blog post SEO
-      updateSEO({
-        title: selectedPost.title,
-        description: selectedPost.excerpt,
-        url: `/blog/${selectedPost.slug}`,
-        type: "article",
-        publishedTime: selectedPost.created_date,
-        tags: selectedPost.tags || [],
-        author: "Suno Prompt Master"
-      });
-
-      const structuredData = generateStructuredData('article', {
-        title: selectedPost.title,
-        description: selectedPost.excerpt,
-        url: `/blog/${selectedPost.slug}`,
-        publishedTime: selectedPost.created_date,
-        author: "Suno Prompt Master",
-        tags: selectedPost.tags || []
-      });
-      
-      injectStructuredData(structuredData);
-    } else {
-      // Blog listing page SEO
-      updateSEO({
-        title: "Suno AI Blog - Latest Music Generation Tips & Tutorials",
-        description: "Discover the latest Suno AI music generation techniques, prompt engineering tips, and industry insights. Stay updated with our comprehensive blog.",
-        url: "/blog",
-        tags: ["suno ai blog", "music generation tips", "ai music tutorials", "prompt engineering", "music ai news"]
-      });
-    }
-  }, [selectedPost]);
-  
-  const clearPostSelection = () => {
-    setSelectedPost(null);
-    window.history.pushState({}, '', createPageUrl('Blog'));
-  }
-
-  const loadSpecificPost = useCallback(async (slug, retries = 3) => {
-    try {
-      if (!BlogPost || typeof BlogPost.filter !== 'function') {
-        if (retries > 0) {
-          setTimeout(() => loadSpecificPost(slug, retries - 1), 500);
-        } else { throw new Error("BlogPost entity failed to load."); }
-        return;
-      }
-      const postList = await BlogPost.filter({ slug }, '-created_date', 1);
-      if (postList.length > 0) {
-        setSelectedPost(postList[0]);
-      } else {
-        clearPostSelection();
-      }
-    } catch (error) {
-      console.error('Error loading specific post:', error);
-    }
+    // Blog listing page SEO
+    updateSEO({
+      title: "Suno AI Blog - Latest Music Generation Tips & Tutorials",
+      description: "Discover the latest Suno AI music generation techniques, prompt engineering tips, and industry insights. Stay updated with our comprehensive blog.",
+      url: "/blog",
+      tags: ["suno ai blog", "music generation tips", "ai music tutorials", "prompt engineering", "music ai news"]
+    });
   }, []);
-
-  const checkForPostParam = useCallback(() => {
-    const urlParams = new URLSearchParams(window.location.search);
-    const postSlug = urlParams.get('post');
-    if (postSlug) {
-      loadSpecificPost(postSlug);
-    }
-  }, [loadSpecificPost]);
-
+  
+  // Remove unused functions
   const loadPosts = useCallback(async (retries = 3) => {
     try {
       if (!BlogPost || typeof BlogPost.filter !== 'function') {
@@ -138,54 +78,12 @@ export default function Blog() {
 
   useEffect(() => {
     loadPosts();
-    checkForPostParam();
-  }, [loadPosts, checkForPostParam]);
+    // Remove checkForPostParam - router handles individual posts now
+  }, [loadPosts]);
 
   useEffect(() => {
     filterPosts();
   }, [filterPosts]);
-
-  if (selectedPost) {
-    return (
-      <div className="min-h-screen text-white pt-10">
-        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
-          <Button
-            variant="ghost"
-            onClick={clearPostSelection}
-            className="mb-8 text-slate-300 hover:bg-white/10 hover:text-white"
-          >
-            <ArrowLeft className="w-4 h-4 mr-2" />
-            Back to Blog
-          </Button>
-
-                    <article>
-            <header className="mb-12">
-              <Badge className="mb-4 bg-blue-500/20 text-blue-400 border border-blue-500/30 capitalize">
-                {selectedPost.category.replace('-', ' ')}
-              </Badge>
-              <h1 className="text-4xl md:text-5xl font-extrabold tracking-tighter mb-4">
-                {selectedPost.title}
-              </h1>
-              <div className="flex items-center gap-6 text-slate-400 text-sm">
-                <div className="flex items-center gap-2">
-                  <Clock className="w-4 h-4" />
-                  <span>{new Date(selectedPost.created_date).toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' })}</span>
-                </div>
-              </div>
-            </header>
-
-            <div className="prose prose-invert prose-lg max-w-none prose-p:text-slate-300 prose-headings:font-extrabold prose-headings:tracking-tighter prose-h2:text-3xl prose-h3:text-2xl prose-a:text-blue-400 hover:prose-a:text-blue-500 prose-strong:text-white">
-              <ReactMarkdown
-                components={{
-                  h1: ({node, ...props}) => <h2 {...props}>{props.children}</h2>
-                }}
-              >{selectedPost.content}</ReactMarkdown>
-            </div>
-          </article>
-        </div>
-      </div>
-    );
-  }
 
   return (
     <div className="min-h-screen text-white pt-10">
@@ -243,12 +141,9 @@ export default function Blog() {
         ) : (
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
             {filteredPosts.map((post, index) => (
-              <div
-                key={post.id}
-              >
+              <Link key={post.id} to={`/blog/${post.slug}`} className="block h-full">
                 <Card 
-                  onClick={() => setSelectedPost(post)}
-                  className="bg-white/5 border border-white/10 rounded-xl hover:border-blue-500/50 transition-all duration-300 group cursor-pointer h-full flex flex-col"
+                  className="bg-white/5 border border-white/10 rounded-xl hover:border-blue-500/50 transition-all duration-300 group h-full flex flex-col"
                 >
                   <CardContent className="p-6 flex-1 flex flex-col">
                     <Badge className="w-fit mb-3 bg-blue-500/20 text-blue-400 border-blue-500/30 capitalize">
@@ -265,7 +160,7 @@ export default function Blog() {
                     </div>
                   </CardContent>
                 </Card>
-              </div>
+              </Link>
             ))}
           </div>
         )}

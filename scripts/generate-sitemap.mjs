@@ -11,7 +11,6 @@ const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const projectRoot = path.join(__dirname, '..');
 const distDir = path.join(projectRoot, 'dist');
 const contentDir = path.join(projectRoot, 'src', 'content', 'guides');
-const pagesDir = path.join(projectRoot, 'src', 'pages');
 
 function safeRead(filePath) {
   try { return readFileSync(filePath, 'utf8'); } catch { return null; }
@@ -32,6 +31,25 @@ function collectMarkdownGuides() {
     .filter(Boolean);
 }
 
+// Mock blog posts for now - in real deployment, this could fetch from API
+// or use a build-time JSON dump of blog posts
+function collectBlogPosts() {
+  // Static known blog posts - update as needed or make dynamic
+  const knownPosts = [
+    { slug: 'getting-started-suno-ai', lastmod: '2024-01-15T00:00:00Z' },
+    { slug: 'advanced-prompt-engineering', lastmod: '2024-01-10T00:00:00Z' },
+    { slug: 'hip-hop-beats-guide', lastmod: '2024-01-08T00:00:00Z' },
+    { slug: 'how-to-make-beats-with-suno', lastmod: '2024-01-20T00:00:00Z' },
+    { slug: 'suno-ai-melody-techniques', lastmod: '2024-01-25T00:00:00Z' }
+  ];
+  return knownPosts.map(p => ({ 
+    loc: `${BASE_URL}/blog/${p.slug}`, 
+    lastmod: p.lastmod,
+    changefreq: 'weekly',
+    priority: '0.7'
+  }));
+}
+
 // Static top-level routes (ensure alignment with router)
 const staticRoutes = [
   '/',
@@ -50,8 +68,9 @@ function generateXml(urls) {
 function main() {
   const now = new Date().toISOString();
   const guides = collectMarkdownGuides();
+  const blogs = collectBlogPosts();
   const baseEntries = uniq(staticRoutes).map(r => ({ loc: `${BASE_URL}${r}`, lastmod: now, priority: r === '/' ? '1.0' : '0.8', changefreq: 'daily' }));
-  const urls = [...baseEntries, ...guides];
+  const urls = [...baseEntries, ...guides, ...blogs];
   if (!existsSync(distDir)) mkdirSync(distDir, { recursive: true });
   const xml = generateXml(urls);
   writeFileSync(path.join(distDir, 'sitemap.xml'), xml, 'utf8');

@@ -9,6 +9,8 @@ import GuideArticle from "./GuideArticle.jsx";
 
 import Generator from "./Generator";
 
+import BlogArticle from "./BlogArticle.jsx";
+
 import { BrowserRouter as Router, Route, Routes, useLocation } from 'react-router-dom';
 
 const PAGES = {
@@ -53,6 +55,8 @@ function PagesContent() {
                 <Route path="/Blog" element={<Blog />} />
                 
                 {/** Canonical lowercase routes */}
+                <Route path="/blog" element={<Blog />} />
+                <Route path="/blog/:slug" element={<BlogArticle />} />
                 <Route path="/guide" element={<Guide />} />
                 <Route path="/guide/:slug" element={<GuideArticle />} />
                 {/** Backwards compatibility for existing uppercase links */}
