@@ -10,7 +10,7 @@ import { motion } from "framer-motion";
 import ReactMarkdown from "react-markdown";
 import { Link } from "react-router-dom";
 import { createPageUrl } from "@/utils";
-import { updateSEO, generateStructuredData, injectStructuredData } from "@/utils/seo";
+import { updateSEO, generateStructuredData, injectStructuredData } from "@/utils/seo.js";
 
 const categories = [
   { value: "all", label: "All Posts" },

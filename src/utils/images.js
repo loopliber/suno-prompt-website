@@ -1,4 +1,5 @@
 // Image optimization utilities
+import React, { useState, useRef, useEffect } from 'react';
 
 export const IMAGE_DEFAULTS = {
   quality: 85,
@@ -29,8 +30,6 @@ export const generateSizes = (breakpoints = {
 };
 
 // Lazy loading image component with SEO optimization
-import React, { useState, useRef, useEffect } from 'react';
-
 export const SEOImage = ({ 
   src, 
   alt, 
