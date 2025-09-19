@@ -7,7 +7,16 @@ import { Textarea } from "@/components/ui/textarea";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { Badge } from "@/components/ui/badge";
 import { Sparkles, Copy, RefreshCw, Music, Zap, Settings, Volume2, Edit3, ChevronsRight } from "lucide-react";
-import { motion } from "framer-motion";
+// Temporarily disable framer-motion to fix useLayoutEffect error
+// import { motion } from "framer-motion";
+
+// Temporary motion replacement
+const motion = {
+  div: 'div',
+  section: 'section',
+  h1: 'h1',
+  p: 'p'
+};
 
 const genres = [ "Pop", "Rock", "Hip-Hop", "R&B", "Electronic", "Dance", "House", "Techno", "Ambient", "Jazz", "Blues", "Country", "Folk", "Indie", "Alternative", "Metal", "Punk", "Reggae", "Classical", "Orchestral", "Cinematic", "Lo-fi", "Trap", "Dubstep", "Synthwave", "Funk" ];
 const moods = [ "Energetic", "Calm", "Happy", "Sad", "Uplifting", "Dark", "Mysterious", "Romantic", "Aggressive", "Peaceful", "Nostalgic", "Epic", "Dreamy", "Intense", "Playful", "Melancholic" ];

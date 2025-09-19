@@ -7,7 +7,16 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { ArrowRight, Sparkles, Music, Zap, BookOpen, TrendingUp, Users, Star, ChevronsRight } from "lucide-react";
-import { motion } from "framer-motion";
+// Temporarily disable framer-motion to fix useLayoutEffect error
+// import { motion } from "framer-motion";
+
+// Temporary motion replacement
+const motion = {
+  div: 'div',
+  section: 'section',
+  h1: 'h1',
+  p: 'p'
+};
 
 export default function Homepage() {
   const [featuredPosts, setFeaturedPosts] = useState([]);

@@ -4,10 +4,19 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { BookOpen, ChevronRight, ArrowLeft, Zap } from "lucide-react";
-import { motion } from "framer-motion";
+// Temporarily disable framer-motion to fix useLayoutEffect error
+// import { motion } from "framer-motion";
 import ReactMarkdown from "react-markdown";
 import { Link } from "react-router-dom";
 import { createPageUrl } from "@/utils";
+
+// Temporary motion replacement
+const motion = {
+  div: 'div',
+  section: 'section',
+  h1: 'h1',
+  p: 'p'
+};
 
 export default function Guide() {
   const [sections, setSections] = useState([]);

@@ -6,11 +6,20 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Search, Clock, ArrowRight, Filter, ArrowLeft } from "lucide-react";
-import { motion } from "framer-motion";
+// Temporarily disable framer-motion to fix useLayoutEffect error
+// import { motion } from "framer-motion";
 import ReactMarkdown from "react-markdown";
 import { Link } from "react-router-dom";
 import { createPageUrl } from "@/utils";
 import { updateSEO, generateStructuredData, injectStructuredData } from "@/utils/seo.js";
+
+// Temporary motion replacement to fix useLayoutEffect error
+const motion = {
+  div: 'div',
+  section: 'section',
+  h1: 'h1',
+  p: 'p'
+};
 
 const categories = [
   { value: "all", label: "All Posts" },
