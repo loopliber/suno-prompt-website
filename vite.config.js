@@ -23,64 +23,26 @@ export default defineConfig({
     }
   },
   build: {
-    // Performance optimizations
-    rollupOptions: {
-      output: {
-        // Manual chunk splitting for better caching
-        manualChunks: (id) => {
-          // React vendor chunk
-          if (id.includes('react') || id.includes('react-dom')) {
-            return 'react-vendor';
-          }
-          
-          // Router chunk
-          if (id.includes('react-router')) {
-            return 'router';
-          }
-          
-          // UI components chunk
-          if (id.includes('@radix-ui')) {
-            return 'ui-vendor';
-          }
-          
-          // Animation chunk
-          if (id.includes('framer-motion')) {
-            return 'animations';
-          }
-          
-          // Icons chunk
-          if (id.includes('lucide-react')) {
-            return 'icons';
-          }
-          
-          // Utilities chunk
-          if (id.includes('clsx') || id.includes('class-variance-authority')) {
-            return 'utils';
-          }
-          
-          // All other node_modules
-          if (id.includes('node_modules')) {
-            return 'vendor';
-          }
-        }
-      }
-    },
-    
+    // TEMP: Disable custom manual chunk splitting while debugging useLayoutEffect error.
+    // If a root-cause is unrelated to chunking we can restore a leaner version later.
+    // (Leaving rollupOptions empty lets Vite decide optimal splits.)
+    rollupOptions: {},
+
     // Target modern browsers for better optimization
     target: 'es2020',
-    
-    // Source maps for production debugging
-    sourcemap: false,
-    
+
+    // Enable source maps in production to map the failing stack frame.
+    sourcemap: true,
+
     // Minimize CSS
     cssMinify: true,
-    
+
     // Compress output
     minify: 'esbuild',
-    
-    // Remove console logs in production
+
+    // Keep console & debugger statements for now so diagnostics appear in prod.
     esbuild: {
-      drop: ['console', 'debugger']
+      drop: []
     }
   },
   
