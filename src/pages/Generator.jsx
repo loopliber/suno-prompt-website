@@ -104,6 +104,7 @@ export default function Generator() {
         <div className="grid lg:grid-cols-12 gap-8">
           <div className="lg:col-span-7 space-y-6">
             <CardWrapper title="Core Style" icon={<Settings />}>
+              <h2 className="sr-only">Core Style</h2>
               <div className="grid md:grid-cols-2 gap-6">
                 <div>
                   <Label className="text-slate-300 mb-2 block text-sm">Genre</Label>
@@ -120,6 +121,7 @@ export default function Generator() {
             </CardWrapper>
 
             <CardWrapper title="Mood & Feel" icon={<Volume2 />}>
+              <h2 className="sr-only">Mood and Feel</h2>
               <div className="flex flex-wrap gap-2">
                 {moods.map((mood) => (
                   <Badge key={mood} variant={formData.mood.includes(mood) ? "default" : "outline"} onClick={() => handleMultiSelectToggle('mood', mood)} className={`cursor-pointer transition-all px-3 py-1 text-sm ${formData.mood.includes(mood) ? "bg-blue-600 border-blue-600 hover:bg-blue-700" : "border-white/20 text-slate-300 hover:border-blue-500/50 hover:text-white"}`}>{mood}</Badge>
@@ -128,6 +130,7 @@ export default function Generator() {
             </CardWrapper>
 
             <CardWrapper title="Instrumentation & Tempo" icon={<Music />}>
+              <h2 className="sr-only">Instrumentation and Tempo</h2>
               <div className="space-y-6">
                 <div>
                     <Label className="text-slate-300 mb-2 block text-sm">Featured Instruments</Label>
@@ -148,6 +151,7 @@ export default function Generator() {
             </CardWrapper>
             
             <CardWrapper title="Lyrics & Structure" icon={<Edit3 />}>
+              <h2 className="sr-only">Lyrics and Structure</h2>
                 <div className="space-y-4">
                     <Select value={formData.songStructure} onValueChange={(v) => setFormData(p => ({...p, songStructure: v}))}>
                       <SelectTrigger className="bg-white/5 border-white/10 h-11"><SelectValue /></SelectTrigger>
@@ -161,7 +165,8 @@ export default function Generator() {
                 </div>
             </CardWrapper>
 
-             <CardWrapper title="Advanced & Custom Tags" icon={<Sparkles />}>
+         <CardWrapper title="Advanced & Custom Tags" icon={<Sparkles />}>
+           <h2 className="sr-only">Advanced and Custom Tags</h2>
                 <Input placeholder="Comma-separated, e.g., 8-bit, reverb, female vocalist" value={formData.customTags} onChange={(e) => setFormData(p => ({...p, customTags: e.target.value}))} className="bg-white/5 border-white/10 h-11" />
             </CardWrapper>
           </div>

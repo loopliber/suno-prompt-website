@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useMemo } from "react";
 import { GuideSection } from "@/api/entities";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
@@ -9,6 +9,7 @@ import { BookOpen, ChevronRight, ArrowLeft, Zap } from "lucide-react";
 import ReactMarkdown from "react-markdown";
 import { Link } from "react-router-dom";
 import { createPageUrl } from "@/utils";
+import { listGuides } from '@/utils/guideLoader';
 
 // Temporary motion replacement
 const motion = {
@@ -20,7 +21,6 @@ const motion = {
 
 export default function Guide() {
   const [sections, setSections] = useState([]);
-  const [selectedSection, setSelectedSection] = useState(null);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
@@ -39,80 +39,7 @@ export default function Guide() {
 
   const getMainSections = () => sections.filter(section => !section.parent_section);
   const getSubSections = (parentSlug) => sections.filter(section => section.parent_section === parentSlug);
-  const findSectionBySlug = (slug) => sections.find(s => s.slug === slug);
-
-  if (selectedSection) {
-    const parent = selectedSection.parent_section ? findSectionBySlug(selectedSection.parent_section) : selectedSection;
-    const subSections = parent ? getSubSections(parent.slug) : [];
-    
-    return (
-      <div className="min-h-screen text-white pt-10">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
-          <Button
-            variant="ghost"
-            onClick={() => setSelectedSection(null)}
-            className="mb-8 text-slate-300 hover:bg-white/10 hover:text-white"
-          >
-            <ArrowLeft className="w-4 h-4 mr-2" />
-            Back to All Sections
-          </Button>
-
-          <div className="grid lg:grid-cols-12 gap-12">
-            <aside className="lg:col-span-3">
-              <div className="sticky top-24">
-                <h3 className="font-semibold mb-4 text-blue-400">
-                  {parent ? parent.title : 'Guide Sections'}
-                </h3>
-                <div className="space-y-2">
-                  {parent && (
-                    <Button
-                      variant={selectedSection.id === parent.id ? "secondary" : "ghost"}
-                      size="sm"
-                      className={`w-full justify-start text-left h-auto py-2 ${selectedSection.id === parent.id ? 'bg-white/10 text-white' : 'text-slate-300 hover:text-white hover:bg-white/5'}`}
-                      onClick={() => setSelectedSection(parent)}
-                    >
-                      {parent.title}
-                    </Button>
-                  )}
-                  {subSections.map((sub) => (
-                    <Button
-                      key={sub.id}
-                      variant={selectedSection.id === sub.id ? "secondary" : "ghost"}
-                      size="sm"
-                      className={`w-full justify-start text-left h-auto py-2 pl-8 ${selectedSection.id === sub.id ? 'bg-white/10 text-white' : 'text-slate-400 hover:text-white hover:bg-white/5'}`}
-                      onClick={() => setSelectedSection(sub)}
-                    >
-                      {sub.title}
-                    </Button>
-                  ))}
-                </div>
-              </div>
-            </aside>
-
-                        <main 
-              key={selectedSection.id}
-              className="lg:col-span-9"
-            >
-              <article>
-                <header className="mb-8 border-b border-white/10 pb-8">
-                  <Badge className="mb-4 bg-blue-500/20 text-blue-400 border border-blue-500/30">
-                    Section {selectedSection.order}
-                  </Badge>
-                  <h1 className="text-4xl md:text-5xl font-extrabold tracking-tighter mb-4">
-                    {selectedSection.title}
-                  </h1>
-                </header>
-
-                <div className="prose prose-invert prose-lg max-w-none prose-p:text-slate-300 prose-headings:font-extrabold prose-headings:tracking-tighter prose-h2:text-3xl prose-h3:text-2xl prose-a:text-blue-400 hover:prose-a:text-blue-500 prose-strong:text-white">
-                  <ReactMarkdown>{selectedSection.content}</ReactMarkdown>
-                </div>
-              </article>
-            </main>
-          </div>
-        </div>
-      </div>
-    );
-  }
+  const guides = useMemo(() => listGuides(), []);
 
   return (
     <div className="min-h-screen text-white pt-10">
@@ -128,6 +55,38 @@ export default function Guide() {
           </div>
         </div>
 
+        {/* Markdown Guides Section */}
+        {guides.length > 0 && (
+          <div className="mb-20">
+            <h2 className="text-3xl font-bold tracking-tighter mb-8 flex items-center gap-3">
+              <div className="w-10 h-10 bg-blue-500/10 rounded-lg flex items-center justify-center border border-blue-500/30">
+                <BookOpen className="w-5 h-5 text-blue-400" />
+              </div>
+              Latest Guides
+            </h2>
+            <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+              {guides.slice(0,6).map(g => (
+                <Link key={g.slug} to={`/guide/${g.slug}`} className="group block h-full">
+                  <Card className="bg-white/5 border border-white/10 rounded-xl hover:border-blue-500/50 transition-all duration-300 h-full flex flex-col">
+                    <CardContent className="p-6 flex-1 flex flex-col">
+                      <h3 className="font-semibold text-white mb-3 group-hover:text-blue-400 transition-colors text-lg leading-tight">
+                        {g.title}
+                      </h3>
+                      <p className="text-slate-400 text-sm leading-relaxed flex-1 mb-4 line-clamp-4">
+                        {g.excerpt}
+                      </p>
+                      <div className="flex items-center justify-between text-xs text-slate-500 mt-auto">
+                        <span>{new Date(g.publishDate).toLocaleDateString()}</span>
+                        <span>{g.readingTimeMinutes} min read</span>
+                      </div>
+                    </CardContent>
+                  </Card>
+                </Link>
+              ))}
+            </div>
+          </div>
+        )}
+
         {loading ? (
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
             {[...Array(6)].map((_, i) => (
@@ -136,7 +95,7 @@ export default function Guide() {
           </div>
         ) : (
           <div className="space-y-12">
-            {getMainSections().map((section, index) => (
+            {getMainSections().map((section) => (
               <div
                 key={section.id}
               >
@@ -147,34 +106,35 @@ export default function Guide() {
                   {section.title}
                 </h2>
                 <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-4">
-                  <Card 
-                    className="bg-white/5 border border-white/10 rounded-xl hover:border-blue-500/50 transition-all duration-300 group cursor-pointer h-full flex flex-col"
-                    onClick={() => setSelectedSection(section)}
-                  >
-                    <CardContent className="p-6 flex-1 flex flex-col">
-                      <p className="text-slate-400 text-sm leading-relaxed flex-1 mb-4">
-                        {section.content.substring(0, 150)}...
-                      </p>
-                       <div className="flex items-center text-blue-400 text-sm font-medium group-hover:translate-x-1 transition-transform">
-                        Read introduction <ChevronRight className="w-4 h-4 ml-1" />
-                      </div>
-                    </CardContent>
-                  </Card>
-                  {getSubSections(section.slug).map(sub => (
+                  <Link to={`/guide/${section.slug}`} className="block h-full">
                     <Card 
-                      key={sub.id}
-                      className="bg-white/5 border border-white/10 rounded-xl hover:border-blue-500/50 transition-all duration-300 group cursor-pointer h-full flex flex-col"
-                      onClick={() => setSelectedSection(sub)}
+                      className="bg-white/5 border border-white/10 rounded-xl hover:border-blue-500/50 transition-all duration-300 group h-full flex flex-col"
                     >
-                      <CardContent className="p-6 flex-1 flex flex-col justify-between">
-                        <h3 className="font-semibold text-white group-hover:text-blue-400 transition-colors">
-                          {sub.title}
-                        </h3>
-                         <div className="flex items-center text-blue-400 text-sm font-medium group-hover:translate-x-1 transition-transform mt-4">
-                          View section <ChevronRight className="w-4 h-4 ml-1" />
+                      <CardContent className="p-6 flex-1 flex flex-col">
+                        <p className="text-slate-400 text-sm leading-relaxed flex-1 mb-4">
+                          {section.content.substring(0, 150)}...
+                        </p>
+                        <div className="flex items-center text-blue-400 text-sm font-medium group-hover:translate-x-1 transition-transform">
+                          Read introduction <ChevronRight className="w-4 h-4 ml-1" />
                         </div>
                       </CardContent>
                     </Card>
+                  </Link>
+                  {getSubSections(section.slug).map(sub => (
+                    <Link key={sub.id} to={`/guide/${sub.slug}`} className="block h-full">
+                      <Card 
+                        className="bg-white/5 border border-white/10 rounded-xl hover:border-blue-500/50 transition-all duration-300 group h-full flex flex-col"
+                      >
+                        <CardContent className="p-6 flex-1 flex flex-col justify-between">
+                          <h3 className="font-semibold text-white group-hover:text-blue-400 transition-colors">
+                            {sub.title}
+                          </h3>
+                          <div className="flex items-center text-blue-400 text-sm font-medium group-hover:translate-x-1 transition-transform mt-4">
+                            View section <ChevronRight className="w-4 h-4 ml-1" />
+                          </div>
+                        </CardContent>
+                      </Card>
+                    </Link>
                   ))}
                 </div>
               </div>

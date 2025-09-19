@@ -175,7 +175,11 @@ export default function Blog() {
             </header>
 
             <div className="prose prose-invert prose-lg max-w-none prose-p:text-slate-300 prose-headings:font-extrabold prose-headings:tracking-tighter prose-h2:text-3xl prose-h3:text-2xl prose-a:text-blue-400 hover:prose-a:text-blue-500 prose-strong:text-white">
-              <ReactMarkdown>{selectedPost.content}</ReactMarkdown>
+              <ReactMarkdown
+                components={{
+                  h1: ({node, ...props}) => <h2 {...props}>{props.children}</h2>
+                }}
+              >{selectedPost.content}</ReactMarkdown>
             </div>
           </article>
         </div>
