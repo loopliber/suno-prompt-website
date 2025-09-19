@@ -2,6 +2,7 @@ import React, { useState, useEffect, useCallback } from "react";
 import { BlogPost } from "@/api/entities";
 import { Link } from "react-router-dom";
 import { createPageUrl } from "@/utils";
+import { updateSEO, generateStructuredData, injectStructuredData } from "@/utils/seo";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
@@ -11,6 +12,24 @@ import { motion } from "framer-motion";
 export default function Homepage() {
   const [featuredPosts, setFeaturedPosts] = useState([]);
   const [loading, setLoading] = useState(true);
+
+  // SEO setup for homepage
+  useEffect(() => {
+    updateSEO({
+      title: "Suno AI Prompt Master - Best Music Generation Prompts & Guides",
+      description: "Master Suno AI music generation with expert prompts, comprehensive guides, and professional techniques. Create amazing songs with our proven prompt library and tutorials.",
+      url: "/",
+      tags: ["suno ai", "music generation", "ai prompts", "music prompts", "ai music", "song creation", "music ai", "prompt engineering", "suno prompts", "ai composer"]
+    });
+
+    const structuredData = generateStructuredData('website', {
+      title: "Suno AI Prompt Master",
+      description: "Master Suno AI music generation with expert prompts, comprehensive guides, and professional techniques.",
+      url: "/"
+    });
+    
+    injectStructuredData(structuredData);
+  }, []);
 
   const loadFeaturedPosts = useCallback(async (retries = 3) => {
     try {

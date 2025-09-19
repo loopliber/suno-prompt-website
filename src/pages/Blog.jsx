@@ -10,6 +10,7 @@ import { motion } from "framer-motion";
 import ReactMarkdown from "react-markdown";
 import { Link } from "react-router-dom";
 import { createPageUrl } from "@/utils";
+import { updateSEO, generateStructuredData, injectStructuredData } from "@/utils/seo";
 
 const categories = [
   { value: "all", label: "All Posts" },
@@ -27,6 +28,41 @@ export default function Blog() {
   const [loading, setLoading] = useState(true);
   const [searchTerm, setSearchTerm] = useState("");
   const [selectedCategory, setSelectedCategory] = useState("all");
+
+  // SEO setup for blog page
+  useEffect(() => {
+    if (selectedPost) {
+      // Individual blog post SEO
+      updateSEO({
+        title: selectedPost.title,
+        description: selectedPost.excerpt,
+        url: `/blog/${selectedPost.slug}`,
+        type: "article",
+        publishedTime: selectedPost.created_date,
+        tags: selectedPost.tags || [],
+        author: "Suno Prompt Master"
+      });
+
+      const structuredData = generateStructuredData('article', {
+        title: selectedPost.title,
+        description: selectedPost.excerpt,
+        url: `/blog/${selectedPost.slug}`,
+        publishedTime: selectedPost.created_date,
+        author: "Suno Prompt Master",
+        tags: selectedPost.tags || []
+      });
+      
+      injectStructuredData(structuredData);
+    } else {
+      // Blog listing page SEO
+      updateSEO({
+        title: "Suno AI Blog - Latest Music Generation Tips & Tutorials",
+        description: "Discover the latest Suno AI music generation techniques, prompt engineering tips, and industry insights. Stay updated with our comprehensive blog.",
+        url: "/blog",
+        tags: ["suno ai blog", "music generation tips", "ai music tutorials", "prompt engineering", "music ai news"]
+      });
+    }
+  }, [selectedPost]);
   
   const clearPostSelection = () => {
     setSelectedPost(null);
