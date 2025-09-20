@@ -25,15 +25,15 @@ export default function Homepage() {
   // SEO setup for homepage
   useEffect(() => {
     updateSEO({
-      title: "Suno AI Prompt Master - Best Music Generation Prompts & Guides",
-      description: "Master Suno AI music generation with expert prompts, comprehensive guides, and professional techniques. Create amazing songs with our proven prompt library and tutorials.",
+      title: "Best Suno AI Prompts Generator - Free Prompt Examples & Tips Guide",
+      description: "Free Suno prompt generator with best AI prompts, examples, and tips. Super Suno prompt guide for creating amazing music. Get the best Suno AI prompts and techniques.",
       url: "/",
-      tags: ["suno ai", "music generation", "ai prompts", "music prompts", "ai music", "song creation", "music ai", "prompt engineering", "suno prompts", "ai composer"]
+      tags: ["suno prompt generator", "suno prompt examples", "super suno prompt", "suno prompt tips", "suno prompt free", "best suno ai prompts", "suno ai prompts guide", "free suno prompts", "suno ai generator", "music ai prompts"]
     });
 
     const structuredData = generateStructuredData('website', {
-      title: "Suno AI Prompt Master",
-      description: "Master Suno AI music generation with expert prompts, comprehensive guides, and professional techniques.",
+      title: "Best Suno AI Prompts Generator - Free Examples & Guide",
+      description: "Free Suno prompt generator with best AI prompts, examples, and tips. Super Suno prompt guide for creating amazing music.",
       url: "/"
     });
     
@@ -68,10 +68,10 @@ export default function Homepage() {
   }, [loadFeaturedPosts]); // Dependency array includes loadFeaturedPosts
 
   const stats = [
-    { label: "Prompt Templates", value: "500+", icon: Music },
-    { label: "AI Styles", value: "100+", icon: Sparkles },
+    { label: "Free Suno Prompts", value: "500+", icon: Music },
+    { label: "Prompt Examples", value: "100+", icon: Sparkles },
     { label: "Active Users", value: "10K+", icon: Users },
-    { label: "Guide Sections", value: "25+", icon: BookOpen },
+    { label: "Prompt Tips", value: "25+", icon: BookOpen },
   ];
 
   return (
@@ -82,15 +82,15 @@ export default function Homepage() {
           <div className="text-center">
             <div>
               <Badge className="mb-6 bg-blue-500/10 text-blue-400 border border-blue-500/30 px-4 py-1 text-sm">
-                The Ultimate Guide to Suno V3
+                Free Suno Prompt Generator & Best AI Prompts Guide
               </Badge>
               <h1 className="text-4xl sm:text-6xl lg:text-7xl font-extrabold tracking-tighter">
-                Craft Perfect Music 
+                Best Suno AI Prompts
                 <br />
-                with <span className="text-blue-400">AI Prompts</span>
+                <span className="text-blue-400">Generator & Examples</span>
               </h1>
               <p className="text-lg text-slate-400 mt-6 max-w-3xl mx-auto">
-                Unlock professional-quality music generation. Master Suno AI with our comprehensive guides, interactive prompt generator, and expert techniques.
+                Free Suno prompt generator with super Suno prompt examples and expert tips. Create amazing music with our best Suno AI prompts guide and proven techniques.
               </p>
             </div>
 
@@ -100,15 +100,61 @@ export default function Homepage() {
               <Link to={createPageUrl("Generator")}>
                 <Button size="lg" className="w-full sm:w-auto bg-blue-600 hover:bg-blue-700 text-white px-6 py-6 rounded-lg text-base font-semibold shadow-lg shadow-blue-500/20">
                   <Zap className="w-5 h-5 mr-2" />
-                  Launch Prompt Generator
+                  Free Suno Prompt Generator
                 </Button>
               </Link>
               <Link to={createPageUrl("Guide")}>
                 <Button variant="outline" size="lg" className="w-full sm:w-auto border-white/20 text-slate-300 hover:bg-white/10 hover:text-white px-6 py-6 rounded-lg text-base font-semibold">
                   <BookOpen className="w-5 h-5 mr-2" />
-                  Read The Guide
+                  Best Suno AI Prompts Guide
                 </Button>
               </Link>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Key Features Section */}
+      <section className="py-20">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="text-center mb-16">
+            <h2 className="text-3xl md:text-4xl font-bold tracking-tighter mb-4">
+              Why Choose Our Suno Prompt Generator?
+            </h2>
+            <p className="text-lg text-slate-400 max-w-3xl mx-auto">
+              Get access to the best Suno AI prompts collection with expert tips and super Suno prompt examples for every music genre.
+            </p>
+          </div>
+
+          <div className="grid md:grid-cols-3 gap-8">
+            <div className="bg-white/5 border border-white/10 rounded-xl p-8 text-center">
+              <div className="text-blue-400 mb-4">
+                <Zap className="w-12 h-12 mx-auto" />
+              </div>
+              <h3 className="text-xl font-semibold mb-3">Free Suno Prompt Generator</h3>
+              <p className="text-slate-400">
+                Access our completely free Suno prompt generator with hundreds of tested prompt examples and templates for instant music creation.
+              </p>
+            </div>
+
+            <div className="bg-white/5 border border-white/10 rounded-xl p-8 text-center">
+              <div className="text-blue-400 mb-4">
+                <Star className="w-12 h-12 mx-auto" />
+              </div>
+              <h3 className="text-xl font-semibold mb-3">Best Suno AI Prompts</h3>
+              <p className="text-slate-400">
+                Curated collection of the best Suno AI prompts that actually work. Each prompt is tested and optimized for maximum quality results.
+              </p>
+            </div>
+
+            <div className="bg-white/5 border border-white/10 rounded-xl p-8 text-center">
+              <div className="text-blue-400 mb-4">
+                <BookOpen className="w-12 h-12 mx-auto" />
+              </div>
+              <h3 className="text-xl font-semibold mb-3">Expert Suno Prompt Tips</h3>
+              <p className="text-slate-400">
+                Learn professional Suno prompt tips and techniques from our comprehensive guide. Master super Suno prompt creation in minutes.
+              </p>
             </div>
           </div>
         </div>
@@ -138,9 +184,9 @@ export default function Homepage() {
       <section className="py-20">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-left mb-12">
-            <h2 className="text-3xl md:text-4xl font-bold tracking-tighter">Latest from the Blog</h2>
+            <h2 className="text-3xl md:text-4xl font-bold tracking-tighter">Latest Suno Prompt Examples & Tips</h2>
             <p className="text-lg text-slate-400 max-w-2xl mt-2">
-              Stay updated with the latest Suno AI techniques, prompt strategies, and music creation tips.
+              Discover the latest super Suno prompt techniques, best AI prompts examples, and expert tips for creating professional-quality music.
             </p>
           </div>
 
@@ -187,20 +233,72 @@ export default function Homepage() {
         </div>
       </section>
 
-      {/* Prompt Guide CTA */}
+      {/* Popular Suno Prompt Examples Section */}
+      <section className="py-20">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="text-center mb-12">
+            <h2 className="text-3xl md:text-4xl font-bold tracking-tighter mb-4">
+              Popular Suno Prompt Examples
+            </h2>
+            <p className="text-lg text-slate-400 max-w-3xl mx-auto">
+              Try these super Suno prompt examples that create amazing results. Each prompt is crafted using our best Suno AI prompts techniques.
+            </p>
+          </div>
+
+          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+            <div className="bg-white/5 border border-white/10 rounded-xl p-6">
+              <Badge className="mb-3 bg-blue-500/20 text-blue-400 border-blue-500/30">Pop Music</Badge>
+              <h3 className="text-lg font-semibold mb-2">Upbeat Pop Hit</h3>
+              <p className="text-slate-400 text-sm mb-3">
+                "Upbeat pop song with catchy melody, electronic beats, female vocals, modern production, radio-friendly"
+              </p>
+              <div className="text-blue-400 text-xs">✨ Super Suno Prompt</div>
+            </div>
+
+            <div className="bg-white/5 border border-white/10 rounded-xl p-6">
+              <Badge className="mb-3 bg-purple-500/20 text-purple-400 border-purple-500/30">Hip-Hop</Badge>
+              <h3 className="text-lg font-semibold mb-2">Trap Beat</h3>
+              <p className="text-slate-400 text-sm mb-3">
+                "Hard trap beat, 808 drums, dark atmosphere, heavy bass, rapid hi-hats, modern production"
+              </p>
+              <div className="text-blue-400 text-xs">🎵 Best AI Prompt</div>
+            </div>
+
+            <div className="bg-white/5 border border-white/10 rounded-xl p-6">
+              <Badge className="mb-3 bg-green-500/20 text-green-400 border-green-500/30">Electronic</Badge>
+              <h3 className="text-lg font-semibold mb-2">Ambient Chill</h3>
+              <p className="text-slate-400 text-sm mb-3">
+                "Ambient electronic music, ethereal pads, soft percussion, meditative atmosphere, healing frequencies"
+              </p>
+              <div className="text-blue-400 text-xs">🌟 Free Prompt</div>
+            </div>
+          </div>
+
+          <div className="text-center mt-12">
+            <Link to={createPageUrl("Generator")}>
+              <Button size="lg" className="bg-blue-600 hover:bg-blue-700 text-white px-6 py-4 rounded-lg text-base font-semibold">
+                Generate More Suno Prompts Free
+                <ArrowRight className="w-5 h-5 ml-2" />
+              </Button>
+            </Link>
+          </div>
+        </div>
+      </section>
+
+      {/* Suno AI Prompts Guide CTA */}
       <section className="py-20">
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center bg-white/5 border border-white/10 rounded-2xl p-12">
           <div>
             <h2 className="text-3xl md:text-4xl font-bold tracking-tighter mb-4">
-              Go from Beginner to Pro
+              Complete Suno AI Prompts Guide
             </h2>
             <p className="text-lg text-slate-400 mb-8">
-              Our complete guide covers everything from prompt anatomy to advanced song structure and style emulation. It's the only resource you'll need.
+              Master super Suno prompt creation with our comprehensive guide. From beginner prompt examples to advanced techniques - get the best Suno AI prompts tips and strategies for free.
             </p>
             <Link to={createPageUrl("Guide")}>
               <Button size="lg" className="bg-blue-600 hover:bg-blue-700 text-white px-6 py-6 rounded-lg text-base font-semibold shadow-lg shadow-blue-500/20">
                 <BookOpen className="w-5 h-5 mr-2" />
-                Explore The Complete Guide
+                Access Free Suno Prompts Guide
               </Button>
             </Link>
           </div>
