@@ -4,9 +4,6 @@ import Homepage from "./Homepage";
 
 import Blog from "./Blog";
 
-import Guide from "./Guide";
-import GuideArticle from "./GuideArticle.jsx";
-
 import Generator from "./Generator";
 
 import BlogArticle from "./BlogArticle.jsx";
@@ -18,8 +15,6 @@ const PAGES = {
     Homepage: Homepage,
     
     Blog: Blog,
-    
-    Guide: Guide,
     
     Generator: Generator,
     
@@ -57,10 +52,7 @@ function PagesContent() {
                 {/** Canonical lowercase routes */}
                 <Route path="/blog" element={<Blog />} />
                 <Route path="/blog/:slug" element={<BlogArticle />} />
-                <Route path="/guide" element={<Guide />} />
-                <Route path="/guide/:slug" element={<GuideArticle />} />
                 {/** Backwards compatibility for existing uppercase links */}
-                <Route path="/Guide" element={<Guide />} />
                 
                 <Route path="/Generator" element={<Generator />} />
                 

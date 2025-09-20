@@ -103,10 +103,10 @@ export default function Homepage() {
                   Free Suno Prompt Generator
                 </Button>
               </Link>
-              <Link to={createPageUrl("Guide")}>
+              <Link to={createPageUrl("Blog")}>
                 <Button variant="outline" size="lg" className="w-full sm:w-auto border-white/20 text-slate-300 hover:bg-white/10 hover:text-white px-6 py-6 rounded-lg text-base font-semibold">
                   <BookOpen className="w-5 h-5 mr-2" />
-                  Best Suno AI Prompts Guide
+                  Read Our Blog & Tips
                 </Button>
               </Link>
             </div>
@@ -141,7 +141,7 @@ export default function Homepage() {
               <div className="text-blue-400 mb-4">
                 <Star className="w-12 h-12 mx-auto" />
               </div>
-              <h3 className="text-xl font-semibold mb-3">Best Suno AI Prompts</h3>
+              <h3 className="text-xl font-semibold mb-3">Best Suno AI Prompts Collection</h3>
               <p className="text-slate-400">
                 Curated collection of the best Suno AI prompts that actually work. Each prompt is tested and optimized for maximum quality results.
               </p>
@@ -151,9 +151,9 @@ export default function Homepage() {
               <div className="text-blue-400 mb-4">
                 <BookOpen className="w-12 h-12 mx-auto" />
               </div>
-              <h3 className="text-xl font-semibold mb-3">Expert Suno Prompt Tips</h3>
+              <h3 className="text-xl font-semibold mb-3">Expert Suno Prompt Tips & Tutorials</h3>
               <p className="text-slate-400">
-                Learn professional Suno prompt tips and techniques from our comprehensive guide. Master super Suno prompt creation in minutes.
+                Learn professional Suno prompt tips and techniques from our comprehensive blog articles. Master super Suno prompt creation in minutes.
               </p>
             </div>
           </div>
@@ -285,20 +285,20 @@ export default function Homepage() {
         </div>
       </section>
 
-      {/* Suno AI Prompts Guide CTA */}
+      {/* Suno AI Prompts Blog CTA */}
       <section className="py-20">
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center bg-white/5 border border-white/10 rounded-2xl p-12">
           <div>
             <h2 className="text-3xl md:text-4xl font-bold tracking-tighter mb-4">
-              Complete Suno AI Prompts Guide
+              Complete Suno AI Prompts Blog
             </h2>
             <p className="text-lg text-slate-400 mb-8">
-              Master super Suno prompt creation with our comprehensive guide. From beginner prompt examples to advanced techniques - get the best Suno AI prompts tips and strategies for free.
+              Master super Suno prompt creation with our comprehensive blog articles. From beginner prompt examples to advanced techniques - get the best Suno AI prompts tips and strategies for free.
             </p>
-            <Link to={createPageUrl("Guide")}>
+            <Link to={createPageUrl("Blog")}>
               <Button size="lg" className="bg-blue-600 hover:bg-blue-700 text-white px-6 py-6 rounded-lg text-base font-semibold shadow-lg shadow-blue-500/20">
                 <BookOpen className="w-5 h-5 mr-2" />
-                Access Free Suno Prompts Guide
+                Read Free Suno Prompts Blog
               </Button>
             </Link>
           </div>

@@ -2,7 +2,7 @@
 import React from "react";
 import { Link, useLocation } from "react-router-dom";
 import { createPageUrl } from "@/utils";
-import { Music, Book, Zap, Home, Menu, X } from "lucide-react";
+import { Music, Book, Zap, Home, Menu, X, Brain, AudioWaveform } from "lucide-react";
 import { Button } from "@/components/ui/button";
 
 const navigationItems = [
@@ -14,11 +14,6 @@ const navigationItems = [
   {
     title: "Blog",
     url: createPageUrl("Blog"),
-    icon: Book,
-  },
-  {
-    title: "Prompt Guide",
-    url: createPageUrl("Guide"),
     icon: Book,
   },
   {
@@ -77,11 +72,11 @@ export default function Layout({ children, currentPageName }) {
             <div className="flex justify-between items-center h-16">
               {/* Logo */}
               <Link to={createPageUrl("Homepage")} className="flex items-center gap-2 group">
-                <div className="w-8 h-8 bg-white/10 rounded-lg flex items-center justify-center border border-white/20 group-hover:border-blue-400 transition-colors">
-                  <Zap className="w-5 h-5 text-blue-400" />
+                <div className="w-8 h-8 bg-gradient-to-br from-blue-500/20 to-purple-600/20 rounded-lg flex items-center justify-center border border-blue-400/30 group-hover:border-blue-400 transition-all duration-200 group-hover:shadow-lg group-hover:shadow-blue-400/20">
+                  <AudioWaveform className="w-5 h-5 text-blue-400" />
                 </div>
-                <span className="text-xl font-semibold text-white">
-                  SunoPrompt
+                <span className="text-xl font-semibold bg-gradient-to-r from-blue-400 to-purple-400 bg-clip-text text-transparent">
+                  sunoprompter
                 </span>
               </Link>
 

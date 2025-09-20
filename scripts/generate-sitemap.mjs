@@ -53,7 +53,6 @@ function collectBlogPosts() {
 // Static top-level routes (ensure alignment with router)
 const staticRoutes = [
   '/',
-  '/guide',
   '/generator',
   '/blog'
 ];
@@ -67,10 +66,9 @@ function generateXml(urls) {
 
 function main() {
   const now = new Date().toISOString();
-  const guides = collectMarkdownGuides();
   const blogs = collectBlogPosts();
   const baseEntries = uniq(staticRoutes).map(r => ({ loc: `${BASE_URL}${r}`, lastmod: now, priority: r === '/' ? '1.0' : '0.8', changefreq: 'daily' }));
-  const urls = [...baseEntries, ...guides, ...blogs];
+  const urls = [...baseEntries, ...blogs];
   if (!existsSync(distDir)) mkdirSync(distDir, { recursive: true });
   const xml = generateXml(urls);
   writeFileSync(path.join(distDir, 'sitemap.xml'), xml, 'utf8');

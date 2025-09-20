@@ -238,7 +238,7 @@ The future of music creation is here, and it's more accessible than ever. Welcom
 
 ---
 
-*Ready to start creating? Head over to our [Prompt Generator](/generator) for an interactive tool that helps you build perfect Suno AI prompts, or explore our [Complete Guide](/guide) for advanced techniques and strategies.*`,
+*Ready to start creating? Head over to our [Prompt Generator](/generator) for an interactive tool that helps you build perfect Suno AI prompts, or explore our [Blog](/blog) for more advanced techniques and strategies.*`,
     category: "beginner-guides",
     featured: true,
     created_date: "2024-01-15",
@@ -498,7 +498,7 @@ The future of music creation is collaborative—humans providing creative vision
 
 ---
 
-*Ready to put these techniques into practice? Visit our [Interactive Prompt Generator](/generator) to experiment with advanced prompt structures, or explore our [Complete Suno AI Guide](/guide) for more specialized techniques and industry insights.*`,
+*Ready to put these techniques into practice? Visit our [Interactive Prompt Generator](/generator) to experiment with advanced prompt structures, or explore our [Blog](/blog) for more specialized techniques and industry insights.*`,
     category: "advanced-techniques",
     featured: true,
     created_date: "2024-01-10",
@@ -904,7 +904,7 @@ Remember that AI is a tool—powerful and transformative, but still requiring hu
 
 ---
 
-*Ready to create your own hip-hop masterpieces? Try our [Interactive Beat Generator](/generator) with specialized hip-hop prompt templates, or explore more genre-specific techniques in our [Complete Music Production Guide](/guide).*`,
+*Ready to create your own hip-hop masterpieces? Try our [Interactive Beat Generator](/generator) with specialized hip-hop prompt templates, or explore more genre-specific techniques in our [Blog](/blog).*`,
     category: "genre-prompts",
     featured: false,
     created_date: "2024-01-08",
@@ -1345,7 +1345,7 @@ The future of beat making is collaborative—human creativity directing AI capab
 
 ---
 
-*Ready to start making professional beats? Try our [Interactive Beat Generator](/generator) with genre-specific templates, or explore advanced techniques in our [Complete Music Production Guide](/guide).*`,
+*Ready to start making professional beats? Try our [Interactive Beat Generator](/generator) with genre-specific templates, or explore advanced techniques in our [Blog](/blog).*`,
     category: "production",
     featured: true,
     created_date: "2024-01-20",
@@ -1770,122 +1770,11 @@ The most important aspect of melody creation is the human element—your creativ
 
 ---
 
-*Ready to create unforgettable melodies? Explore our [Interactive Melody Generator](/generator) with advanced compositional tools, or dive deeper into music theory with our [Complete Composition Guide](/guide).*`,
+*Ready to create unforgettable melodies? Explore our [Interactive Melody Generator](/generator) with advanced compositional tools, or dive deeper into music theory with our [Blog](/blog).*`,
     category: "composition",
     featured: false,
     created_date: "2024-01-25",
     tags: ["melody", "composition", "harmony", "songwriting", "music theory", "hooks", "emotional", "techniques", "suno ai", "musical creativity"]
-  }
-];
-
-// Mock data for guide sections
-const mockGuideSections = [
-  {
-    id: 1,
-    title: "Introduction to Suno AI",
-    slug: "introduction",
-    content: `# Welcome to Suno AI
-
-Suno AI is a revolutionary music generation platform that transforms text descriptions into full musical compositions. Whether you're a seasoned musician or a complete beginner, Suno AI makes music creation accessible to everyone.
-
-## What Makes Suno Special?
-
-- **Text-to-Music**: Simply describe what you want to hear
-- **High Quality**: Professional-grade audio output
-- **Versatile Genres**: From classical to electronic, pop to metal
-- **Fast Generation**: Get your music in seconds
-- **Commercial Use**: Use generated music in your projects
-
-## Getting Started
-
-1. Sign up for a Suno AI account
-2. Start with simple prompts
-3. Experiment with different styles
-4. Refine your prompting skills
-5. Create amazing music!`,
-    order: 1,
-    category: "basics"
-  },
-  {
-    id: 2,
-    title: "Writing Effective Prompts",
-    slug: "effective-prompts",
-    content: `# Writing Effective Prompts
-
-The key to great results with Suno AI lies in how you describe your musical vision. Here's how to write prompts that get the results you want.
-
-## Prompt Structure
-
-A good prompt typically includes:
-
-1. **Genre/Style**: "jazz", "rock", "electronic", "classical"
-2. **Mood/Emotion**: "upbeat", "melancholic", "energetic", "peaceful"
-3. **Instruments**: "piano", "guitar", "drums", "strings"
-4. **Tempo**: "fast", "slow", "moderate", or specific BPM
-5. **Additional Details**: "male vocals", "instrumental", "vintage sound"
-
-## Examples
-
-### Good Prompts:
-- "Upbeat folk song with acoustic guitar and harmonica, cheerful melody"
-- "Dark ambient electronic track, synthesizers, slow tempo, atmospheric"
-- "Energetic pop-punk song with electric guitars, fast drums, catchy chorus"
-
-### Avoid These:
-- "Make me a song" (too vague)
-- "The best music ever" (subjective, unclear)
-- "Song like [famous artist]" (copyright issues)`,
-    order: 2,
-    category: "basics"
-  },
-  {
-    id: 3,
-    title: "Understanding Music Genres",
-    slug: "music-genres",
-    content: `# Understanding Music Genres
-
-Different genres have distinct characteristics. Understanding these will help you create more authentic and appealing music.
-
-## Popular Genres on Suno
-
-### Pop
-- Catchy melodies and hooks
-- Verse-chorus structure
-- Modern production
-- Accessible to wide audience
-
-### Rock
-- Electric guitars and drums
-- Energetic and powerful
-- Guitar solos and riffs
-- Strong rhythm section
-
-### Electronic
-- Synthesized sounds
-- Digital production techniques
-- Varied sub-genres (house, techno, ambient)
-- Often instrumental
-
-### Jazz
-- Complex harmonies
-- Improvisation elements
-- Swing or syncopated rhythms
-- Traditional instruments (saxophone, piano, bass)
-
-### Classical
-- Orchestral instruments
-- Complex compositions
-- Rich harmonies
-- Formal structures
-
-## Mixing Genres
-
-Don't be afraid to combine genres:
-- "Jazz-fusion with electronic elements"
-- "Folk-rock with orchestral strings"
-- "Hip-hop with classical piano"`,
-    order: 3,
-    category: "advanced"
   }
 ];
 
@@ -1924,22 +1813,6 @@ export const BlogPost = {
   
   get: async (id) => {
     return mockBlogPosts.find(post => post.id === id);
-  }
-};
-
-export const GuideSection = {
-  list: async (sort = 'order') => {
-    let sections = [...mockGuideSections];
-    
-    if (sort === 'order') {
-      sections.sort((a, b) => a.order - b.order);
-    }
-    
-    return sections;
-  },
-  
-  get: async (id) => {
-    return mockGuideSections.find(section => section.id === id);
   }
 };
 
