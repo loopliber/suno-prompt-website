@@ -123,17 +123,117 @@ export default function Guide() {
         )}
 
         {!loading && !error && sections.length === 0 && guides.length === 0 && (
-          <div className="text-center py-20">
-            <div className="text-slate-500 mb-4">
-              <BookOpen className="w-16 h-16 mx-auto mb-4" />
+          <div className="space-y-12">
+            {/* Fallback Static Content */}
+            <div>
+              <h2 className="text-3xl font-bold tracking-tighter mb-6 flex items-center gap-3">
+                <div className="w-10 h-10 bg-white/10 rounded-lg flex items-center justify-center border border-white/20">
+                  <BookOpen className="w-5 h-5 text-blue-400" />
+                </div>
+                Getting Started with Suno AI
+              </h2>
+              <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-4">
+                <Card className="bg-white/5 border border-white/10 rounded-xl hover:border-blue-500/50 transition-all duration-300 group h-full flex flex-col">
+                  <CardContent className="p-6 flex-1 flex flex-col">
+                    <h3 className="font-semibold text-white group-hover:text-blue-400 transition-colors mb-3">
+                      Introduction to Suno AI
+                    </h3>
+                    <p className="text-slate-400 text-sm leading-relaxed flex-1 mb-4">
+                      Learn the basics of Suno AI music generation. Understand how to create your first songs with simple text prompts.
+                    </p>
+                    <div className="flex items-center text-blue-400 text-sm font-medium group-hover:translate-x-1 transition-transform">
+                      Get Started <ChevronRight className="w-4 h-4 ml-1" />
+                    </div>
+                  </CardContent>
+                </Card>
+
+                <Card className="bg-white/5 border border-white/10 rounded-xl hover:border-blue-500/50 transition-all duration-300 group h-full flex flex-col">
+                  <CardContent className="p-6 flex-1 flex flex-col">
+                    <h3 className="font-semibold text-white group-hover:text-blue-400 transition-colors mb-3">
+                      Writing Effective Prompts
+                    </h3>
+                    <p className="text-slate-400 text-sm leading-relaxed flex-1 mb-4">
+                      Master the art of prompt engineering. Learn how to structure prompts for better results and consistent quality.
+                    </p>
+                    <div className="flex items-center text-blue-400 text-sm font-medium group-hover:translate-x-1 transition-transform">
+                      Learn Prompting <ChevronRight className="w-4 h-4 ml-1" />
+                    </div>
+                  </CardContent>
+                </Card>
+
+                <Card className="bg-white/5 border border-white/10 rounded-xl hover:border-blue-500/50 transition-all duration-300 group h-full flex flex-col">
+                  <CardContent className="p-6 flex-1 flex flex-col">
+                    <h3 className="font-semibold text-white group-hover:text-blue-400 transition-colors mb-3">
+                      Music Genres & Styles
+                    </h3>
+                    <p className="text-slate-400 text-sm leading-relaxed flex-1 mb-4">
+                      Explore different music genres and learn specific techniques for creating authentic-sounding tracks in any style.
+                    </p>
+                    <div className="flex items-center text-blue-400 text-sm font-medium group-hover:translate-x-1 transition-transform">
+                      Explore Genres <ChevronRight className="w-4 h-4 ml-1" />
+                    </div>
+                  </CardContent>
+                </Card>
+              </div>
             </div>
-            <h3 className="text-xl font-semibold mb-2">No Guide Content Available</h3>
-            <p className="text-slate-400 mb-6">
-              Guide content is being prepared. Please check back soon or try refreshing the page.
-            </p>
-            <Button onClick={loadSections} variant="outline" className="border-white/20 text-slate-300 hover:text-white">
-              Refresh
-            </Button>
+
+            <div>
+              <h2 className="text-3xl font-bold tracking-tighter mb-6 flex items-center gap-3">
+                <div className="w-10 h-10 bg-white/10 rounded-lg flex items-center justify-center border border-white/20">
+                  <Zap className="w-5 h-5 text-blue-400" />
+                </div>
+                Advanced Techniques
+              </h2>
+              <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-4">
+                <Card className="bg-white/5 border border-white/10 rounded-xl hover:border-blue-500/50 transition-all duration-300 group h-full flex flex-col">
+                  <CardContent className="p-6 flex-1 flex flex-col">
+                    <h3 className="font-semibold text-white group-hover:text-blue-400 transition-colors mb-3">
+                      Advanced Prompt Engineering
+                    </h3>
+                    <p className="text-slate-400 text-sm leading-relaxed flex-1 mb-4">
+                      Take your prompting skills to the next level with advanced techniques for professional-quality results.
+                    </p>
+                    <div className="flex items-center text-blue-400 text-sm font-medium group-hover:translate-x-1 transition-transform">
+                      Master Advanced <ChevronRight className="w-4 h-4 ml-1" />
+                    </div>
+                  </CardContent>
+                </Card>
+
+                <Card className="bg-white/5 border border-white/10 rounded-xl hover:border-blue-500/50 transition-all duration-300 group h-full flex flex-col">
+                  <CardContent className="p-6 flex-1 flex flex-col">
+                    <h3 className="font-semibold text-white group-hover:text-blue-400 transition-colors mb-3">
+                      Song Structure & Arrangement
+                    </h3>
+                    <p className="text-slate-400 text-sm leading-relaxed flex-1 mb-4">
+                      Learn how to create well-structured songs with proper verse-chorus arrangements and dynamic flow.
+                    </p>
+                    <div className="flex items-center text-blue-400 text-sm font-medium group-hover:translate-x-1 transition-transform">
+                      Structure Songs <ChevronRight className="w-4 h-4 ml-1" />
+                    </div>
+                  </CardContent>
+                </Card>
+
+                <Card className="bg-white/5 border border-white/10 rounded-xl hover:border-blue-500/50 transition-all duration-300 group h-full flex flex-col">
+                  <CardContent className="p-6 flex-1 flex flex-col">
+                    <h3 className="font-semibold text-white group-hover:text-blue-400 transition-colors mb-3">
+                      Production Tips & Tricks
+                    </h3>
+                    <p className="text-slate-400 text-sm leading-relaxed flex-1 mb-4">
+                      Professional production techniques and insider tips for getting radio-ready results from Suno AI.
+                    </p>
+                    <div className="flex items-center text-blue-400 text-sm font-medium group-hover:translate-x-1 transition-transform">
+                      Pro Tips <ChevronRight className="w-4 h-4 ml-1" />
+                    </div>
+                  </CardContent>
+                </Card>
+              </div>
+            </div>
+          </div>
+        )}
+
+        {!loading && !error && sections.length === 0 && guides.length === 0 && (
+          <div className="hidden">
+            {/* This div was moved above - keeping for structure */}
           </div>
         )}
 
