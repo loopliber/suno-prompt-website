@@ -10,6 +10,7 @@ import ReactMarkdown from "react-markdown";
 import { Link } from "react-router-dom";
 import { createPageUrl } from "@/utils";
 import { listGuides } from '@/utils/guideLoader';
+import { updateSEO } from "@/utils/seo.js";
 
 // Temporary motion replacement
 const motion = {
@@ -22,24 +23,44 @@ const motion = {
 export default function Guide() {
   const [sections, setSections] = useState([]);
   const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
 
   useEffect(() => {
+    // SEO setup for guide page
+    updateSEO({
+      title: "Complete Suno AI Guide - Best Prompts, Tips & Techniques",
+      description: "Master Suno AI with our comprehensive guide. Learn prompt engineering, music generation techniques, and expert tips for creating amazing songs.",
+      url: "/guide",
+      tags: ["suno ai guide", "suno prompts", "music generation guide", "ai music tutorial", "suno techniques", "prompt engineering"]
+    });
+
     loadSections();
   }, []);
 
   const loadSections = async () => {
     try {
+      console.log('Loading guide sections...');
       const allSections = await GuideSection.list('order');
+      console.log('Guide sections loaded:', allSections);
       setSections(allSections);
+      setError(null);
     } catch (error) {
       console.error('Error loading guide sections:', error);
+      setError(error.message);
     }
     setLoading(false);
   };
 
   const getMainSections = () => sections.filter(section => !section.parent_section);
   const getSubSections = (parentSlug) => sections.filter(section => section.parent_section === parentSlug);
-  const guides = useMemo(() => listGuides(), []);
+  
+  let guides = [];
+  try {
+    guides = useMemo(() => listGuides(), []);
+    console.log('Markdown guides loaded:', guides);
+  } catch (err) {
+    console.error('Error loading markdown guides:', err);
+  }
 
   return (
     <div className="min-h-screen text-white pt-10">
@@ -54,6 +75,20 @@ export default function Guide() {
             </p>
           </div>
         </div>
+
+        {/* Error Display */}
+        {error && (
+          <div className="mb-8 bg-red-500/10 border border-red-500/30 rounded-xl p-6 text-center">
+            <h3 className="text-red-400 font-semibold mb-2">Error Loading Guide Content</h3>
+            <p className="text-slate-400">{error}</p>
+            <Button 
+              onClick={loadSections} 
+              className="mt-4 bg-red-600 hover:bg-red-700"
+            >
+              Try Again
+            </Button>
+          </div>
+        )}
 
         {/* Markdown Guides Section */}
         {guides.length > 0 && (
@@ -84,6 +119,21 @@ export default function Guide() {
                 </Link>
               ))}
             </div>
+          </div>
+        )}
+
+        {!loading && !error && sections.length === 0 && guides.length === 0 && (
+          <div className="text-center py-20">
+            <div className="text-slate-500 mb-4">
+              <BookOpen className="w-16 h-16 mx-auto mb-4" />
+            </div>
+            <h3 className="text-xl font-semibold mb-2">No Guide Content Available</h3>
+            <p className="text-slate-400 mb-6">
+              Guide content is being prepared. Please check back soon or try refreshing the page.
+            </p>
+            <Button onClick={loadSections} variant="outline" className="border-white/20 text-slate-300 hover:text-white">
+              Refresh
+            </Button>
           </div>
         )}
 
