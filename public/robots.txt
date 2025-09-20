@@ -2,7 +2,7 @@ User-agent: *
 Allow: /
 
 # Sitemap
-Sitemap: https://suno-prompt-website.vercel.app/sitemap.xml
+Sitemap: https://sunoprompter.com/sitemap.xml
 
 # Crawl-delay for polite crawling
 Crawl-delay: 1

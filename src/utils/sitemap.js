@@ -1,7 +1,7 @@
 // Sitemap generator utility
 import { BlogPost, GuideSection } from "@/api/entities";
 
-const SITE_URL = "https://suno-prompt-website.vercel.app";
+const SITE_URL = "https://sunoprompter.com";
 
 export const generateSitemap = async () => {
   const staticRoutes = [

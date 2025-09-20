@@ -6,7 +6,7 @@
   "scripts": {
     "dev": "vite",
     "build": "vite build && npm run postbuild",
-    "postbuild": "SITE_BASE_URL=https://suno-prompt-website.vercel.app node scripts/generate-sitemap.mjs",
+    "postbuild": "SITE_BASE_URL=https://sunoprompter.com node scripts/generate-sitemap.mjs",
     "lint": "eslint .",
     "preview": "vite preview"
   },

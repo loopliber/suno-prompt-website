@@ -1,23 +1,14 @@
 import Layout from "./Layout.jsx";
-
 import Homepage from "./Homepage";
-
 import Blog from "./Blog";
-
 import Generator from "./Generator";
-
 import BlogArticle from "./BlogArticle.jsx";
-
-import { BrowserRouter as Router, Route, Routes, useLocation } from 'react-router-dom';
+import { BrowserRouter as Router, Route, Routes, useLocation, Navigate } from 'react-router-dom';
 
 const PAGES = {
-    
     Homepage: Homepage,
-    
     Blog: Blog,
-    
     Generator: Generator,
-    
 }
 
 function _getCurrentPage(url) {
@@ -41,21 +32,21 @@ function PagesContent() {
     return (
         <Layout currentPageName={currentPage}>
             <Routes>            
+                {/* Homepage - only accessible via root domain */}
+                <Route path="/" element={<Homepage />} />
                 
-                    <Route path="/" element={<Homepage />} />
+                {/* Redirect old /homepage route to root */}
+                <Route path="/homepage" element={<Navigate to="/" replace />} />
+                <Route path="/Homepage" element={<Navigate to="/" replace />} />
                 
-                
-                <Route path="/Homepage" element={<Homepage />} />
-                
+                {/* Blog routes */}
                 <Route path="/Blog" element={<Blog />} />
-                
-                {/** Canonical lowercase routes */}
                 <Route path="/blog" element={<Blog />} />
                 <Route path="/blog/:slug" element={<BlogArticle />} />
-                {/** Backwards compatibility for existing uppercase links */}
                 
+                {/* Generator route */}
                 <Route path="/Generator" element={<Generator />} />
-                
+                <Route path="/generator" element={<Generator />} />
             </Routes>
         </Layout>
     );

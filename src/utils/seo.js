@@ -1,13 +1,13 @@
 // SEO utilities for dynamic meta tag management
 
 export const SEO_DEFAULTS = {
-  siteName: "Suno Prompt Master",
-  siteUrl: "https://suno-prompt-website.vercel.app",
+  siteName: "sunoprompter",
+  siteUrl: "https://sunoprompter.com",
   defaultTitle: "Suno AI Prompt Master - Best Music Generation Prompts & Guides",
   defaultDescription: "Master Suno AI music generation with expert prompts, comprehensive guides, and professional techniques. Create amazing songs with our proven prompt library and tutorials.",
-  defaultImage: "https://suno-prompt-website.vercel.app/og-image.jpg",
-  twitterHandle: "@sunoprompts",
-  author: "Suno Prompt Master"
+  defaultImage: "https://sunoprompter.com/og-image.jpg",
+  twitterHandle: "@sunoprompter",
+  author: "sunoprompter"
 };
 
 // Update document title and meta tags dynamically

@@ -5,7 +5,7 @@ import path from 'node:path';
 import matter from 'gray-matter';
 
 // Configurable base URL (fallback to env or placeholder)
-const BASE_URL = process.env.SITE_BASE_URL || 'https://example.com';
+const BASE_URL = process.env.SITE_BASE_URL || 'https://sunoprompter.com';
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const projectRoot = path.join(__dirname, '..');
