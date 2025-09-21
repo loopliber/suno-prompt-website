@@ -1,5 +1,6 @@
 import React from 'react'
 import ReactDOM from 'react-dom/client'
+import { HelmetProvider } from 'react-helmet-async'
 import App from '@/App.jsx'
 import '@/index.css'
 
@@ -35,7 +36,9 @@ function renderApp() {
     console.log('🛠 Root created. Rendering <App /> ...');
     r.render(
       <React.StrictMode>
-        <App />
+        <HelmetProvider>
+          <App />
+        </HelmetProvider>
       </React.StrictMode>
     );
     console.log('✅ React app rendered successfully');
