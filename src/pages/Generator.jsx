@@ -50,9 +50,36 @@ export default function Generator() {
     }));
   };
 
+  // Convert artist names to Suno-compatible format using punctuation insertion
+  const convertArtistName = (artistName) => {
+    if (!artistName) return '';
+    
+    // Split by spaces to handle multi-word names
+    const words = artistName.trim().split(' ');
+    
+    const convertedWords = words.map(word => {
+      if (word.length <= 2) return word; // Don't modify very short words
+      
+      // Insert punctuation at different positions for variety
+      const punctuations = ["'", ".", "@", "!", "-"];
+      const randomPunctuation = punctuations[Math.floor(Math.random() * punctuations.length)];
+      
+      // Insert at roughly middle position, but vary it
+      const insertPosition = Math.floor(word.length / 2) + Math.floor(Math.random() * 2) - 1;
+      const safePosition = Math.max(1, Math.min(insertPosition, word.length - 1));
+      
+      return word.slice(0, safePosition) + randomPunctuation + word.slice(safePosition);
+    });
+    
+    return convertedWords.join(' ');
+  };
+
   const generatePrompt = () => {
     let prompt = `[${formData.genre || 'pop'}]`;
-    if (formData.artistStyle) prompt += ` [in the style of ${formData.artistStyle}]`;
+    if (formData.artistStyle) {
+      const convertedArtist = convertArtistName(formData.artistStyle);
+      prompt += ` [in the style of ${convertedArtist}]`;
+    }
     if (formData.mood.length > 0) prompt += ` [${formData.mood.join(', ').toLowerCase()}]`;
     if (formData.popularVibes.length > 0) prompt += ` [${formData.popularVibes.join(', ').toLowerCase()}]`;
     if (formData.tempo) prompt += ` [${formData.tempo.split(' ')[0].toLowerCase()} tempo]`;
@@ -103,7 +130,8 @@ export default function Generator() {
                 </div>
                  <div>
                   <Label className="text-slate-300 mb-2 block text-sm">Artist Style (Optional)</Label>
-                  <Input placeholder="e.g., Daft Punk, Johnny Cash" value={formData.artistStyle} onChange={(e) => setFormData(p => ({...p, artistStyle: e.target.value}))} className="bg-white/5 border-white/10 h-11" />
+                  <Input placeholder="e.g., Avicii, Drake, Lil Baby (auto-converted for Suno)" value={formData.artistStyle} onChange={(e) => setFormData(p => ({...p, artistStyle: e.target.value}))} className="bg-white/5 border-white/10 h-11" />
+                  <p className="text-xs text-slate-400 mt-1">Artist names are automatically converted to Suno-compatible format (e.g., Avicii → Avi'cii)</p>
                 </div>
               </div>
               <div className="mt-6">
