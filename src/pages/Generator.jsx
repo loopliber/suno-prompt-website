@@ -22,6 +22,7 @@ const genres = [ "Pop", "Rock", "Hip-Hop", "R&B", "Electronic", "Dance", "House"
 const moods = [ "Energetic", "Calm", "Happy", "Sad", "Uplifting", "Dark", "Mysterious", "Romantic", "Aggressive", "Peaceful", "Nostalgic", "Epic", "Dreamy", "Intense", "Playful", "Melancholic" ];
 const instruments = [ "Guitar", "Piano", "Drums", "Bass", "Synthesizer", "Violin", "Saxophone", "Trumpet", "Flute", "Cello", "Harp", "Organ", "Accordion", "Harmonica", "Banjo", "Mandolin" ];
 const tempos = [ "Very Slow (60-70 BPM)", "Slow (70-80 BPM)", "Moderate (80-100 BPM)", "Medium (100-120 BPM)", "Fast (120-140 BPM)", "Very Fast (140+ BPM)" ];
+const popularVibes = [ "Soul", "Sampled", "Pitched", "Experimental", "Deep", "Crispy", "Vintage", "Retro" ];
 
 const CardWrapper = ({ children, title, icon }) => (
   <Card className="bg-white/5 border border-white/10 rounded-xl">
@@ -36,7 +37,7 @@ const CardWrapper = ({ children, title, icon }) => (
 );
 
 export default function Generator() {
-  const [formData, setFormData] = useState({ genre: "", mood: [], artistStyle: "", tempo: "", instruments: [], customVibeGenre: "" });
+  const [formData, setFormData] = useState({ genre: "", mood: [], artistStyle: "", tempo: "", instruments: [], popularVibes: [], customVibeGenre: "" });
   const [generatedPrompt, setGeneratedPrompt] = useState("");
   const [copied, setCopied] = useState(false);
 
@@ -53,6 +54,7 @@ export default function Generator() {
     let prompt = `[${formData.genre || 'pop'}]`;
     if (formData.artistStyle) prompt += ` [in the style of ${formData.artistStyle}]`;
     if (formData.mood.length > 0) prompt += ` [${formData.mood.join(', ').toLowerCase()}]`;
+    if (formData.popularVibes.length > 0) prompt += ` [${formData.popularVibes.join(', ').toLowerCase()}]`;
     if (formData.tempo) prompt += ` [${formData.tempo.split(' ')[0].toLowerCase()} tempo]`;
     if (formData.instruments.length > 0) prompt += ` [featuring ${formData.instruments.join(', ').toLowerCase()}]`;
     if (formData.customVibeGenre) prompt += ` [${formData.customVibeGenre}]`;
@@ -69,7 +71,7 @@ export default function Generator() {
   };
 
   const resetForm = () => {
-    setFormData({ genre: "", mood: [], artistStyle: "", tempo: "", instruments: [], customVibeGenre: "" });
+    setFormData({ genre: "", mood: [], artistStyle: "", tempo: "", instruments: [], popularVibes: [], customVibeGenre: "" });
     setGeneratedPrompt("");
   };
 
@@ -102,6 +104,14 @@ export default function Generator() {
                  <div>
                   <Label className="text-slate-300 mb-2 block text-sm">Artist Style (Optional)</Label>
                   <Input placeholder="e.g., Daft Punk, Johnny Cash" value={formData.artistStyle} onChange={(e) => setFormData(p => ({...p, artistStyle: e.target.value}))} className="bg-white/5 border-white/10 h-11" />
+                </div>
+              </div>
+              <div className="mt-6">
+                <Label className="text-slate-300 mb-2 block text-sm">Popular Vibes</Label>
+                <div className="flex flex-wrap gap-2">
+                  {popularVibes.map((vibe) => (
+                    <Badge key={vibe} variant={formData.popularVibes.includes(vibe) ? "default" : "outline"} onClick={() => handleMultiSelectToggle('popularVibes', vibe)} className={`cursor-pointer transition-all px-3 py-1 text-sm ${formData.popularVibes.includes(vibe) ? "bg-green-600 border-green-600 hover:bg-green-700" : "border-white/20 text-slate-300 hover:border-green-500/50 hover:text-white"}`}>{vibe}</Badge>
+                  ))}
                 </div>
               </div>
               <div className="mt-6">
