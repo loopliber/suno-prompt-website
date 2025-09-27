@@ -6,7 +6,7 @@ import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { Badge } from "@/components/ui/badge";
-import { Sparkles, Copy, RefreshCw, Music, Zap, Settings, Volume2, Edit3, ChevronsRight } from "lucide-react";
+import { Sparkles, Copy, RefreshCw, Music, Zap, Settings, Volume2, ChevronsRight } from "lucide-react";
 // Temporarily disable framer-motion to fix useLayoutEffect error
 // import { motion } from "framer-motion";
 
@@ -36,7 +36,7 @@ const CardWrapper = ({ children, title, icon }) => (
 );
 
 export default function Generator() {
-  const [formData, setFormData] = useState({ genre: "", mood: [], artistStyle: "", tempo: "", instruments: [], lyrics: "", songStructure: "verse-chorus", customTags: "" });
+  const [formData, setFormData] = useState({ genre: "", mood: [], artistStyle: "", tempo: "", instruments: [], customVibeGenre: "" });
   const [generatedPrompt, setGeneratedPrompt] = useState("");
   const [copied, setCopied] = useState(false);
 
@@ -55,21 +55,7 @@ export default function Generator() {
     if (formData.mood.length > 0) prompt += ` [${formData.mood.join(', ').toLowerCase()}]`;
     if (formData.tempo) prompt += ` [${formData.tempo.split(' ')[0].toLowerCase()} tempo]`;
     if (formData.instruments.length > 0) prompt += ` [featuring ${formData.instruments.join(', ').toLowerCase()}]`;
-    if (formData.customTags) prompt += ` [${formData.customTags.split(',').map(t => t.trim()).join(', ')}]`;
-
-    if (formData.lyrics) {
-      prompt += "\n\n";
-      if (formData.songStructure === 'custom') {
-        prompt += formData.lyrics;
-      } else {
-        const lines = formData.lyrics.split('\n');
-        if (formData.songStructure === "verse-chorus") {
-          prompt += `[Verse]\n${lines[0] || '...'}\n\n[Chorus]\n${lines[1] || '...'}`;
-        } else if (formData.songStructure === "verse-bridge-chorus") {
-          prompt += `[Verse]\n${lines[0] || '...'}\n\n[Bridge]\n${lines[1] || '...'}\n\n[Chorus]\n${lines[2] || '...'}`;
-        }
-      }
-    }
+    if (formData.customVibeGenre) prompt += ` [${formData.customVibeGenre}]`;
     setGeneratedPrompt(prompt.trim());
   };
   
@@ -83,7 +69,7 @@ export default function Generator() {
   };
 
   const resetForm = () => {
-    setFormData({ genre: "", mood: [], artistStyle: "", tempo: "", instruments: [], lyrics: "", songStructure: "verse-chorus", customTags: "" });
+    setFormData({ genre: "", mood: [], artistStyle: "", tempo: "", instruments: [], customVibeGenre: "" });
     setGeneratedPrompt("");
   };
 
@@ -118,6 +104,11 @@ export default function Generator() {
                   <Input placeholder="e.g., Daft Punk, Johnny Cash" value={formData.artistStyle} onChange={(e) => setFormData(p => ({...p, artistStyle: e.target.value}))} className="bg-white/5 border-white/10 h-11" />
                 </div>
               </div>
+              <div className="mt-6">
+                <Label className="text-slate-300 mb-2 block text-sm">Custom Vibe & Genre</Label>
+                <Input placeholder="e.g., dreamy synthpop, aggressive trap, chill lo-fi hip-hop" value={formData.customVibeGenre} onChange={(e) => setFormData(p => ({...p, customVibeGenre: e.target.value}))} className="bg-white/5 border-white/10 h-11" />
+                <p className="text-xs text-slate-400 mt-1">Add custom vibes and genres for more versatile prompt generation</p>
+              </div>
             </CardWrapper>
 
             <CardWrapper title="Mood & Feel" icon={<Volume2 />}>
@@ -150,25 +141,9 @@ export default function Generator() {
               </div>
             </CardWrapper>
             
-            <CardWrapper title="Lyrics & Structure" icon={<Edit3 />}>
-              <h2 className="sr-only">Lyrics and Structure</h2>
-                <div className="space-y-4">
-                    <Select value={formData.songStructure} onValueChange={(v) => setFormData(p => ({...p, songStructure: v}))}>
-                      <SelectTrigger className="bg-white/5 border-white/10 h-11"><SelectValue /></SelectTrigger>
-                      <SelectContent className="bg-gray-900 border-white/20">
-                          <SelectItem value="verse-chorus" className="text-white hover:!bg-blue-500/20">Verse → Chorus</SelectItem>
-                          <SelectItem value="verse-bridge-chorus" className="text-white hover:!bg-blue-500/20">Verse → Bridge → Chorus</SelectItem>
-                          <SelectItem value="custom" className="text-white hover:!bg-blue-500/20">Custom (Manual Tags)</SelectItem>
-                      </SelectContent>
-                    </Select>
-                    <Textarea placeholder={formData.songStructure === 'custom' ? "Enter full lyrics with [Verse], [Chorus] tags..." : "Line 1: Verse lyrics...\nLine 2: Chorus lyrics..."} value={formData.lyrics} onChange={(e) => setFormData(p => ({...p, lyrics: e.target.value}))} className="bg-white/5 border-white/10 h-24" />
-                </div>
-            </CardWrapper>
 
-         <CardWrapper title="Advanced & Custom Tags" icon={<Sparkles />}>
-           <h2 className="sr-only">Advanced and Custom Tags</h2>
-                <Input placeholder="Comma-separated, e.g., 8-bit, reverb, female vocalist" value={formData.customTags} onChange={(e) => setFormData(p => ({...p, customTags: e.target.value}))} className="bg-white/5 border-white/10 h-11" />
-            </CardWrapper>
+
+
           </div>
 
           <div className="lg:col-span-5">
