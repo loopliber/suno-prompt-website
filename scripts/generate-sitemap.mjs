@@ -34,13 +34,15 @@ function collectMarkdownGuides() {
 // Mock blog posts for now - in real deployment, this could fetch from API
 // or use a build-time JSON dump of blog posts
 function collectBlogPosts() {
-  // Static known blog posts - update as needed or make dynamic
+  // Static known blog posts - updated with all current posts
   const knownPosts = [
     { slug: 'getting-started-suno-ai', lastmod: '2024-01-15T00:00:00Z' },
     { slug: 'advanced-prompt-engineering', lastmod: '2024-01-10T00:00:00Z' },
     { slug: 'hip-hop-beats-guide', lastmod: '2024-01-08T00:00:00Z' },
     { slug: 'how-to-make-beats-with-suno', lastmod: '2024-01-20T00:00:00Z' },
-    { slug: 'suno-ai-melody-techniques', lastmod: '2024-01-25T00:00:00Z' }
+    { slug: 'suno-ai-melody-techniques', lastmod: '2024-01-25T00:00:00Z' },
+    { slug: 'quick-hip-hop-beat-prompts', lastmod: '2024-09-27T00:00:00Z' },
+    { slug: 'suno-ai-hooks-complete-guide', lastmod: '2024-09-28T00:00:00Z' }
   ];
   return knownPosts.map(p => ({ 
     loc: `${BASE_URL}/blog/${p.slug}`, 
